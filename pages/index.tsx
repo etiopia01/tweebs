@@ -12,7 +12,7 @@ export default function Home() {
   const session = useSession()
   const supabase = useSupabaseClient()
   const [error, setError] = useState<string | undefined>(undefined)
-  const [tweebs, setTweebs] = useState<Tweeb[]>([])
+  const [tweebs, setTweebs] = useState<Tweeb[]| null>(null)
   const [add, setAdd] = useState(false)
   
   useEffect(()=> {
@@ -32,10 +32,12 @@ export default function Home() {
     }
     fetchTweebs()
 
-  },[add])
+  },[add, supabase])
 
   const handleRemove = (id:number) => {
-    setTweebs(prev => prev.filter(tweeb=> tweeb.id !== id))
+    
+    setTweebs(prev => (prev?.filter(tweeb=> tweeb.id !== id) || []))
+    
 
   }
 
@@ -57,7 +59,7 @@ export default function Home() {
       <NewTweeb add={addTweeb}/>
       </header>
       <div className="flex flex-col gap-4">
-            {tweebs.map(tweeb=> <TweebCard key={tweeb.id} tweeb={tweeb} remove={handleRemove}/> )}
+            {tweebs && tweebs.map(tweeb=> <TweebCard key={tweeb.id} tweeb={tweeb} remove={handleRemove}/> )}
         </div>
       {error && <p className="text-white text-lg">{error}</p>}
       

@@ -36,10 +36,10 @@ export default function NewTweeb({add}:{add: ()=> void}) {
 
 return (
     <div className="flex flex-col justify-between items-start gap-2 w-full">
-        <input className="w-full border px-4 py-2" type="text" name="title" id="title" value={tweeb.title} onChange={handleChange} placeholder="Your title..."/>
-        <input className="w-full border px-4 py-2" type="text" name="topic" id="topic" value={tweeb.topic} onChange={handleChange} placeholder="What do you want to talk about?"/>
-        <input  className="w-full border px-4 py-2 h-20 text-start" type="text" name="content" value={tweeb.content} onChange={handleChange} placeholder="Your take on it.." />
-        <button className="text-center px-4 py-2 bg-slate-700 text-white cursor-pointer" onClick={handlePublish}>Publish Tweeb</button>
+        <input className="w-full border px-4 py-2 outline-none text-slate-200 bg-slate-900 border-none" type="text" name="title" id="title" value={tweeb.title} onChange={handleChange} placeholder="Your title..."/>
+        <input className="w-full border px-4 py-2 outline-none  text-slate-200 bg-slate-900 border-none" type="text" name="topic" id="topic" value={tweeb.topic} onChange={handleChange} placeholder="What do you want to talk about?"/>
+        <input  className="w-full border px-4 py-2 h-20 outline-none  text-slate-200 bg-slate-900 border-none" type="text" name="content" value={tweeb.content} onChange={handleChange} placeholder="Your take on it.." />
+        <button className="text-center px-4 py-2 border-2 border-slate-200 text-white cursor-pointer ml-auto hover:bg-slate-200 hover:text-slate-800 hover:font-semibold" onClick={handlePublish}>Publish Tweeb</button>
     </div>
 )
 }
