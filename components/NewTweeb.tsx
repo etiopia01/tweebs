@@ -6,7 +6,13 @@ export default function NewTweeb({add}:{add: ()=> void}) {
 
     const session = useSession()
     const supabase = useSupabaseClient()
-    const [tweeb, setTweeb] = useState<Tweeb>({})
+    const [tweeb, setTweeb] = useState<Tweeb >({
+        title: "",
+        content: "",
+        author: "",
+        topic: "",
+        id: 0
+    })
 
     const handleChange = (e)=> {
        if(e.target.name === "content") {
