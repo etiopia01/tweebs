@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { Tweeb } from "./types";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -14,7 +14,7 @@ export default function NewTweeb({add}:{add: ()=> void}) {
         id: 0
     })
 
-    const handleChange = (e)=> {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=> {
        if(e.target.name === "content") {
         setTweeb((prev)=> ({...prev, content: e.target.value}))
        }
