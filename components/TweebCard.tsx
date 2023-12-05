@@ -19,7 +19,10 @@ export default function TweebCard ({tweeb, remove}: {tweeb: Tweeb, remove:(id:nu
     }
     return (
         <div className=" w-auto flex flex-col justify-between  items-start bg-slate-800 rounded-md py-2 px-6">
+            <div className="flex gap-2 items-stretch">
+                <img className="w-6 h-6 rounded-full" src={tweeb.author_avatar} alt="author's avatar picture" />
             <p className="text-xs  text-slate-500 mb-4">{tweeb.author} <span>writes</span></p>
+            </div>
             <div className="flex flex-col gap-2">
             <h1 className="text-2xl  text-slate-200">{tweeb.title}</h1>
             <h3 className="text-md  text-slate-500">{tweeb.topic}</h3>
