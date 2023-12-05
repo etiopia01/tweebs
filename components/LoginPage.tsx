@@ -1,6 +1,12 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { useState } from "react"
+import SignUpForm from "./SignUpForm"
+import SignInForm from "./SignInForm"
 
 export default function LoginPage() {
+
+    const [showSingUp, setShowSignUp] = useState(false)
+    const [showSignIn, setShowSignIn] = useState(false)
 
     const supabase = useSupabaseClient()
     async function LoginWithGoogle(){
@@ -18,8 +24,9 @@ export default function LoginPage() {
             <div className="flex flex-col items-center gap-3">
             <button className="bg-slate-400 rounded-md px-4 py-2 w-52" onClick={LoginWithGoogle}>Login with Google</button>
             <p>Or</p>
-            <button className="bg-blue-600 rounded-md px-4 py-2 w-52">Sign In</button>
-            <button className="bg-lime-700 rounded-md px-4 py-2 w-52">Sign Up</button>
+            {!showSignIn? <button className="bg-lime-700 rounded-md px-4 py-2 w-52" onClick={()=>setShowSignIn(true)}>Sign In</button> : <SignInForm/>}
+            {!showSingUp? <button className="bg-blue-600 rounded-md px-4 py-2 w-52" onClick={()=>setShowSignUp(true)}>Sign Up</button> : <SignUpForm/>}
+
             </div>
         </div>
     )
