@@ -18,17 +18,23 @@ export default function TweebCard ({tweeb, remove}: {tweeb: Tweeb, remove:(id:nu
         remove(tweeb.id)
     }
     return (
-        <div className=" w-auto flex flex-col justify-between  items-start bg-slate-800 rounded-md py-2 px-6">
-            <div className="flex gap-2 items-stretch">
-                <img className="w-6 h-6 rounded-full" src={tweeb.author_avatar} alt="author's avatar picture" />
-            <p className="text-xs  text-slate-500 mb-4">{tweeb.author} <span>writes</span></p>
+        <div className="w-auto flex flex-col justify-between border-t border-b border-slate-800 items-start py-2 px-6">
+            <div className="flex gap-2 items-stretch p-1 mb-3">
+                <img className="w-10 h-10 rounded-full mr-4" src={tweeb.author_avatar} alt="author's avatar picture" />
+            <p className="text-md  text-slate-500 ">{tweeb.author}</p>
+            <p className="text-xs text-slate-700 mt-1">{new Date(tweeb.created_at).toLocaleString()}</p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 ml-10 w-[80%] border-slate-600 px-4 pb-3 rounded-md">
+                <div className="flex items-baseline gap-2 border-b border-slate-700">
             <h1 className="text-2xl  text-slate-200">{tweeb.title}</h1>
-            <h3 className="text-md  text-slate-500">{tweeb.topic}</h3>
-            <p className="text-lg  text-slate-200">{tweeb.content}</p>
+            <h3 className="text-sm italic  text-slate-500">{tweeb.topic}</h3>
             </div>
-            {tweeb.author === session?.user.user_metadata.name && <button className="p-1 rounded-lg bg-slate-600 ml-auto" onClick={handleDelete}>X</button>}
+            <p className="text-md  text-slate-300">{tweeb.content}</p>
+            </div>
+            <div className="w-full px-10 flex justify-between">
+                <button>{tweeb.likes?.length}</button>
+            {tweeb.author === session?.user.user_metadata.name && <button className="px-1 rounded-full justify-self-end hover:bg-slate-800" onClick={handleDelete}>x</button>}
+            </div>
         </div>
     )
 }

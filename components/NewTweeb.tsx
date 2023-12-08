@@ -6,7 +6,7 @@ export default function NewTweeb({add}:{add: ()=> void}) {
 
     
     const session = useSession()
-    console.log(session)
+    
     const supabase = useSupabaseClient()
     const [tweeb, setTweeb] = useState<Tweeb >({
         title: "",

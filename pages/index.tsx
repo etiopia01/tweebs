@@ -27,7 +27,7 @@ export default function Home() {
       if(data) {
         setTweebs(data)
         setError(undefined)
-        
+       
       }
     }
     fetchTweebs()
@@ -52,9 +52,9 @@ export default function Home() {
   }
   else {
   return (
-    <div className="h-[1000vh] flex flex-col gap-10 pl-32 pr-10 py-6 w-full relative bg-slate-950 text-slate-200">
+    <div className="h-[1000vh] flex flex-col gap-10 pl-20 pr-10 py-6 w-full relative bg-slate-950 text-slate-200">
       <SideNav/>
-      <header className="sticky top-0 flex flex-col justify-between px-6 py-4 bg-slate-950">
+      <header className="sticky top-0 flex flex-col justify-between px-6 py-4 bg-slate-950 border-b border-slate-400">
         <h1 className="font-extrabold text-4xl mb-6">TWeeebs</h1>
       <NewTweeb add={addTweeb}/>
       </header>
