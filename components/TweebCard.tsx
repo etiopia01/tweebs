@@ -30,6 +30,7 @@ export default function TweebCard ({tweeb, remove}: {tweeb: Tweeb, remove:(id:nu
             <h3 className="text-sm italic  text-slate-500">{tweeb.topic}</h3>
             </div>
             <p className="text-md  text-slate-300">{tweeb.content}</p>
+            {tweeb.uploads && <div className="flex gap-2">{tweeb.uploads.map((file,index) => <img key={index} src={file} alt="image posted" className="w-40 h-40"/>)}</div>}
             </div>
             <div className="w-full px-10 flex justify-between">
                 <button>{tweeb.likes?.length}</button>
