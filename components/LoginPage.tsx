@@ -16,7 +16,7 @@ export default function LoginPage() {
     }
     
     return (
-        <div className="h-[100vh] w-full flex flex-col justify-center items-center gap-20 bg-slate-950 text-slate-200">
+        <div className="h-[100vh] w-full flex flex-col justify-center items-center gap-20 bg-primary text-slate-200">
             <div className="flex flex-col ">
             <h1 className="text-3xl">TWeeebs</h1>
             <h3 className="text-lg text-slate-400">A manga and anime hub</h3>
