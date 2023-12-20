@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { Tweeb } from "./types";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -18,7 +18,7 @@ export default function NewTweeb({add}:{add: ()=> void}) {
         id: 0,
         created_at:""
     })
-
+    
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=> {
        
         setTweeb((prev)=> ({...prev, [e.target.name]: e.target.value}))
@@ -68,8 +68,9 @@ return (
             <button onClick={()=>setUploads(undefined)} className="text-xs text-slate-500 ml-auto">x</button>
         </div>}
         <div className="w-full flex gap-4 items-center px-6">
-            <label>
-                <span className="text-sm text-slate-300 cursor-pointer">Photos</span>
+            <label className="cursor-pointer flex gap-1 items-center">
+            <img src="/image2.png" className="w-6 h-6"/>
+            <span className="text-sm  text-slate-300">Photos</span>
             <input type="file" className="hidden" multiple onChange={addFiles}/>
             </label>
         <button className="text-center px-4 py-2 border-2 border-slate-200 text-white cursor-pointer ml-auto hover:bg-slate-200 hover:text-slate-800 hover:font-semibold rounded-xl" onClick={handlePublish} disabled={!tweeb.content}>Publish Tweeb</button>
