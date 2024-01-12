@@ -20,13 +20,7 @@ export default function SideNav() {
           pic={session.user.user_metadata.picture}
         />
       )}
-      {session ? (
-        <button onClick={signOut}>Logout</button>
-      ) : (
-        <Link href={"/login"}>
-          <button>Login</button>
-        </Link>
-      )}
+      {session && <button onClick={signOut}>Logout</button>}
     </div>
   );
 }

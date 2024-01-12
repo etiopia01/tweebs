@@ -45,7 +45,7 @@ export default function NewTweeb({ add }: { add: () => void }) {
       for (const file of files) {
         supabase.storage
           .from("files")
-          .upload(file.name, file)
+          .upload(crypto.randomUUID(), file)
           .then((result) => {
             if (result.data) {
               const url =
