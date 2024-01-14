@@ -6,6 +6,10 @@ export type Tweeb = {
   author: string;
   author_avatar?: string;
   topic: string;
-  id: number;
+  id: string;
   created_at: string;
+  user_id: string;
 };
+export type User = {
+  id:
+}

@@ -28,7 +28,7 @@ export default function Home() {
     fetchTweebs();
   }, [add, supabase]);
 
-  const handleRemove = (id: number) => {
+  const handleRemove = (id: string) => {
     setTweebs((prev) => prev?.filter((tweeb) => tweeb.id !== id) || []);
   };
 

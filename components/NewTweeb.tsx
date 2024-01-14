@@ -7,21 +7,16 @@ export default function NewTweeb({ add }: { add: () => void }) {
 
   const supabase = useSupabaseClient();
   const [uploads, setUploads] = useState<string[]>();
-  const [tweeb, setTweeb] = useState<Tweeb>({
-    title: "",
-    content: "",
-    author: "",
-    author_avatar: "",
-    topic: "",
-    id: 0,
-    created_at: "",
-  });
+  const [tweeb, setTweeb] = useState<Tweeb | undefined>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTweeb((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setTweeb((prev) =>
+      prev ? { ...prev, [e.target.name]: e.target.value } : undefined
+    );
   };
 
   const handlePublish = async () => {
+    if (!tweeb) return;
     const { data, error } = await supabase
       .from("tweeebs")
       .insert({
@@ -34,7 +29,7 @@ export default function NewTweeb({ add }: { add: () => void }) {
       })
       .select();
 
-    setTweeb((prev) => ({ ...prev, content: "", title: "", topic: "" }));
+    setTweeb(undefined);
     setUploads(undefined);
     add();
   };
@@ -65,7 +60,7 @@ export default function NewTweeb({ add }: { add: () => void }) {
         type="text"
         name="title"
         id="title"
-        value={tweeb.title}
+        value={tweeb?.title}
         onChange={handleChange}
         placeholder="Your title..."
       />
@@ -74,7 +69,7 @@ export default function NewTweeb({ add }: { add: () => void }) {
         type="text"
         name="topic"
         id="topic"
-        value={tweeb.topic}
+        value={tweeb?.topic}
         onChange={handleChange}
         placeholder="What do you want to talk about?"
       />
@@ -82,7 +77,7 @@ export default function NewTweeb({ add }: { add: () => void }) {
         className="w-full border px-4 py-2 h-20 outline-none  text-slate-200 bg-slate-900 border-none"
         type="text"
         name="content"
-        value={tweeb.content}
+        value={tweeb?.content}
         onChange={handleChange}
         placeholder="Your take on it.."
       />
@@ -108,7 +103,7 @@ export default function NewTweeb({ add }: { add: () => void }) {
         <button
           className="text-center px-4 py-2 border-2 border-slate-200 text-white cursor-pointer ml-auto hover:bg-slate-200 hover:text-slate-800 hover:font-semibold rounded-xl"
           onClick={handlePublish}
-          disabled={!tweeb.content}
+          disabled={!tweeb?.content}
         >
           Publish Tweeb
         </button>

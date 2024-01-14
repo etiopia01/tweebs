@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Tweeb } from "./types";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 export default function TweebCard({
@@ -5,10 +6,20 @@ export default function TweebCard({
   remove,
 }: {
   tweeb: Tweeb;
-  remove: (id: number) => void;
+  remove: (id: string) => void;
 }) {
   const session = useSession();
   const supabase = useSupabaseClient();
+
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    supabase
+      .from("profiles")
+      .select()
+      .eq("id", tweeb.user_id)
+      .then((user) => setUser(user));
+  });
 
   const handleDelete = async () => {
     const { data, error } = await supabase
