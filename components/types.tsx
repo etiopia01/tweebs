@@ -3,7 +3,6 @@ export type Tweeb = {
   content: string;
   uploads?: string[];
   likes?: string[];
-  author: string;
   author_avatar?: string;
   topic: string;
   id: string;
@@ -12,7 +11,8 @@ export type Tweeb = {
 };
 export type User = {
   id: string;
-  username: string;
+  username: string | null;
+  updated_at: string | null;
   full_name: string;
   avatar_url: string;
 };

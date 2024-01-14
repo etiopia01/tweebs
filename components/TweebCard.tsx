@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tweeb } from "./types";
+import { Tweeb, User } from "./types";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 export default function TweebCard({
   tweeb,
@@ -11,15 +11,15 @@ export default function TweebCard({
   const session = useSession();
   const supabase = useSupabaseClient();
 
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<User | undefined>();
 
   useEffect(() => {
     supabase
       .from("profiles")
       .select()
       .eq("id", tweeb.user_id)
-      .then((user) => setUser(user));
-  });
+      .then((data) => (data.data ? setUser(data.data[0]) : setUser(undefined)));
+  }, []);
 
   const handleDelete = async () => {
     const { data, error } = await supabase
@@ -38,7 +38,7 @@ export default function TweebCard({
           src={tweeb.author_avatar}
           alt="author's avatar picture"
         />
-        <p className="text-md  text-slate-400 ">{tweeb.author}</p>
+        <p className="text-md  text-slate-400 ">{user?.full_name}</p>
         <p className="text-xs text-slate-700 mt-1">
           {new Date(tweeb.created_at).toLocaleString()}
         </p>
@@ -64,7 +64,7 @@ export default function TweebCard({
       </div>
       <div className="w-full px-10 flex justify-between">
         <button>{tweeb.likes?.length}</button>
-        {tweeb.author === session?.user.user_metadata.name && (
+        {user?.full_name === session?.user.user_metadata.name && (
           <button
             className="px-1 rounded-full justify-self-end hover:bg-slate-800"
             onClick={handleDelete}
