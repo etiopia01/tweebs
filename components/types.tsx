@@ -11,5 +11,8 @@ export type Tweeb = {
   user_id: string;
 };
 export type User = {
-  id:
-}
+  id: string;
+  username: string;
+  full_name: string;
+  avatar_url: string;
+};
