@@ -4,14 +4,17 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 export default function TweebCard({
   tweeb,
   remove,
+  add,
 }: {
   tweeb: Tweeb;
   remove: (id: string) => void;
+  add: () => void;
 }) {
   const session = useSession();
   const supabase = useSupabaseClient();
 
   const [user, setUser] = useState<User | undefined>();
+  const IsLikedByMe = tweeb.likes?.some((id) => id === session?.user.id);
 
   useEffect(() => {
     supabase
@@ -29,6 +32,29 @@ export default function TweebCard({
       .select();
 
     remove(tweeb.id);
+  };
+
+  const toggleLike = async () => {
+    if (!IsLikedByMe) {
+      const { data, error } = await supabase
+        .from("tweeebs")
+        .update({
+          likes: tweeb.likes
+            ? [...tweeb.likes, session?.user.id]
+            : [session?.user.id],
+        })
+        .eq("id", tweeb.id)
+        .select();
+      add();
+    } else {
+      const newLikes = tweeb.likes?.filter((like) => like !== session?.user.id);
+      const { data, error } = await supabase
+        .from("tweeebs")
+        .update({ likes: newLikes })
+        .eq("id", tweeb.id)
+        .select();
+      add();
+    }
   };
   return (
     <div className="w-auto flex flex-col justify-between border-t border-b border-slate-800 items-start py-2 px-6">
@@ -63,7 +89,9 @@ export default function TweebCard({
         )}
       </div>
       <div className="w-full px-10 flex justify-between">
-        <button>{tweeb.likes?.length}</button>
+        <button className="rounded-full" onClick={toggleLike}>
+          {tweeb.likes?.length || 0}
+        </button>
         {user?.full_name === session?.user.user_metadata.name && (
           <button
             className="px-1 rounded-full justify-self-end hover:bg-slate-800"

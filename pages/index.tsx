@@ -49,7 +49,12 @@ export default function Home() {
         <div className="flex flex-col">
           {tweebs &&
             tweebs.map((tweeb) => (
-              <TweebCard key={tweeb.id} tweeb={tweeb} remove={handleRemove} />
+              <TweebCard
+                key={tweeb.id}
+                tweeb={tweeb}
+                remove={handleRemove}
+                add={addTweeb}
+              />
             ))}
         </div>
         {error && <p className="text-white text-lg">{error}</p>}
