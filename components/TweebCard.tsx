@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Tweeb, User } from "./types";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 export default function TweebCard({
   tweeb,
   remove,
@@ -89,15 +90,27 @@ export default function TweebCard({
         )}
       </div>
       <div className="w-full px-10 flex justify-between">
-        <button className="rounded-full" onClick={toggleLike}>
+        <button
+          className="flex justify-center items-center rounded-full"
+          onClick={toggleLike}
+        >
           {tweeb.likes?.length || 0}
+          {IsLikedByMe ? (
+            <img
+              className="h-6 w-6"
+              src="/heartFull.png"
+              alt="heart icon full"
+            />
+          ) : (
+            <img className="h-8 w-8" src="/heart.png" alt="heart icon empty" />
+          )}
         </button>
         {user?.full_name === session?.user.user_metadata.name && (
           <button
             className="px-1 rounded-full justify-self-end hover:bg-slate-800"
             onClick={handleDelete}
           >
-            x
+            <img className="w-6 h-6" src="/bin.png" alt="delete icon" />
           </button>
         )}
       </div>
